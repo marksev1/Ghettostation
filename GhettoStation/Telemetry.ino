@@ -11,6 +11,12 @@ void init_serial() {
  
 #endif
 
+#if defined(ARDUINO_AVR_MEGA)
+
+      Serial1.begin(TELEMETRY_BAUD);
+
+#endif
+
 #ifdef DEBUG
     Serial.println("Serial initialised"); 
 #endif
@@ -27,43 +33,43 @@ void get_telemetry() {
    }
         
 #if defined(PROTOCOL_UAVTALK) // OpenPilot / Taulabs 
- #ifdef TEENSYPLUS2
+#if defined(TEENSYPLUS2) || defined(ARDUINO_AVR_MEGA)
    if (configuration.telemetry==0) {
  #endif
       if (uavtalk_read()) {
          protocol = "UAVT";
       }
-  #ifdef TEENSYPLUS2
+  #if defined(TEENSYPLUS2) || defined(ARDUINO_AVR_MEGA)
    }
  #endif
 #endif
 
 #if defined(PROTOCOL_MSP) // Multiwii
- #ifdef TEENSYPLUS2
+ #if defined(TEENSYPLUS2) || defined(ARDUINO_AVR_MEGA)
     if (configuration.telemetry==1) {
  #endif
       msp_read(); 
- #ifdef TEENSYPLUS2
+ #if defined(TEENSYPLUS2) || defined(ARDUINO_AVR_MEGA)
     }
  #endif
 #endif
 
 #if defined(PROTOCOL_LIGHTTELEMETRY) // Ghettostation custom light protocol. 
- #ifdef TEENSYPLUS2
+ #if defined(TEENSYPLUS2) || defined(ARDUINO_AVR_MEGA)
    if (configuration.telemetry==2) {
  #endif
       ltm_read();
- #ifdef TEENSYPLUS2
+#if defined(TEENSYPLUS2) || defined(ARDUINO_AVR_MEGA)
    }
  #endif
 #endif
 
 #if defined(PROTOCOL_MAVLINK) // Ardupilot / PixHawk / Taulabs ( mavlink output ) / Other
- #ifdef TEENSYPLUS2
+ #if defined(TEENSYPLUS2) || defined(ARDUINO_AVR_MEGA)
     if (configuration.telemetry==3) {
  #endif
       mavlink_read(); 
- #ifdef TEENSYPLUS2
+ #if defined(TEENSYPLUS2) || defined(ARDUINO_AVR_MEGA)
     }
  #endif
 #endif
