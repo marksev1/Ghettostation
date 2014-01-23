@@ -45,15 +45,25 @@
 //Minimum distance in meters where it will stop moving servos. 
 #define DONTTRACKUNDER  3
 
+#ifdef ARDUINO_AVR_MEGA
+#define PAN_SERVOPIN 3    //PWM Pin for pan servo, for Arduino Mega
+#define TILT_SERVOPIN 4   //PWM Pin for tilt servo, for Arduino Mega
+#else
 #define PAN_SERVOPIN 26		//PWM Pin for pan servo
 #define TILT_SERVOPIN 25		//PWM Pin for tilt servo
+#endif
 //#define PAN_SERVOREVERSED      // Depending of your hardware configuration, servo pwm need to be reversed. 
 //#define TILT_SERVOREVERSED   // same for tilt
 
-
+#ifdef ARDUINO_AVR_MEGA        // free digital pins for buttons on Arduino Mega
+#define LEFT_BUTTON_PIN 32
+#define RIGHT_BUTTON_PIN 34
+#define ENTER_BUTTON_PIN 36
+#else
 #define LEFT_BUTTON_PIN 10     // select a free digital pin for those 3 buttons
 #define RIGHT_BUTTON_PIN 9
 #define ENTER_BUTTON_PIN 8
+#endif
 //#define LED_PIN 13    // using pin13 already have a resistor for led on arduino mini & others
 				
 
